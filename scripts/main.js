@@ -4,10 +4,8 @@ myImage.onclick = () => {
   const mySrc = myImage.getAttribute("src");
   if (mySrc === "images/holo.png") {
     myImage.setAttribute("src", "images/holo2.png");
-    alert('Changing image!');
   } else {
     myImage.setAttribute("src", "images/holo.png");
-    alert('Changing image!');
   }
 };
 
