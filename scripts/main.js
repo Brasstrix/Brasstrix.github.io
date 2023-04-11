@@ -35,3 +35,30 @@ if (!localStorage.getItem("name")) {
 myButton.onclick = () => {
   setUserName();
 };
+
+let UnList = document.querySelector("ul");
+const info = document.createElement('p');
+const info2 = document.createElement('h6');
+
+
+info.textContent = 'Below you can leave and edit comments!';
+info2.textContent = 'These will not be saved';
+
+document.body.appendChild(info);
+document.body.appendChild(info2);
+document.body.appendChild(UnList);
+
+UnList.onclick = function() {
+  const listItem = document.createElement('li');
+  const listContent = prompt('Please enter List item.');
+  listItem.textContent = listContent;
+  UnList.appendChild(listItem);
+
+  listItem.onclick = function(e) {
+    e.stopPropagation();
+    const listContent= prompt('Enter list item update here.');
+    this.textContent = listContent;
+  }
+}
+
+

@@ -5,12 +5,24 @@ html {
 }
 
 p,
-li {
+li,
+h6 {
   margin: 20;
   font-size: 26px;
   line-height: 1;
   letter-spacing: 1px;
   color: #ffffff;
+}
+
+h6 {
+  margin: 6;
+  font-size: 15px;
+}
+
+ul {
+  background: #012241;
+  padding: 25px;
+  border: 1px solid black;
 }
 
 
