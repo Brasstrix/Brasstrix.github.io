@@ -6,12 +6,21 @@ html {
 
 p,
 li,
-h6 {
+h6,
+dl {
   margin: 20;
   font-size: 26px;
   line-height: 1;
   letter-spacing: 1px;
   color: #ffffff;
+}
+
+dl {
+  font-size: 18px;
+}
+
+dt{
+  font-size: 19px;
 }
 
 h6 {
