@@ -1,5 +1,8 @@
 html {
-  font-size: 10px; /* px means "pixels": the base font size is now 10 pixels high */
+  font-size: 26px;
+  line-height: 1;
+  letter-spacing: 1px;
+  color: #ffffff;
   font-family: 'Comic Neue', cursive; /* this should be the rest of the output you got from Google Fonts */
   background-color: #00539f;
 }
@@ -9,10 +12,6 @@ li,
 h6,
 dl {
   margin: 20;
-  font-size: 26px;
-  line-height: 1;
-  letter-spacing: 1px;
-  color: #ffffff;
 }
 
 dl {
