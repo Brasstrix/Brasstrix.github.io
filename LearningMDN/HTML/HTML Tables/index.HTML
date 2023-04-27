@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Table template</title>
+    <!-- <link href="minimal-table.css" rel="stylesheet" type="text/css"> -->
+    <style>
+        html {
+          font-family: sans-serif;
+        }
+    
+        table {
+          border-collapse: collapse;
+          border: 2px solid rgb(200,200,200);
+          letter-spacing: 1px;
+          font-size: 0.8rem;
+        }
+    
+        td, th {
+          border: 1px solid rgb(190,190,190);
+          padding: 10px 20px;
+        }
+    
+        td {
+          text-align: center;
+        }
+    
+        caption {
+          padding: 10px;
+        }
+        </style>
+</head>
+  <body>
+    <h1>School timetable</h1>
+
+    <table>
+        <caption>
+            Time table
+        </caption>
+
+        <colgroup>
+            <col span="2">
+            <col style="background-color:#97DB9A;">
+            <col style="width: 42px;">
+            <col style="background-color: #97DB9A;">
+            <col style="background-color:#DCC48E; border:4px solid #C1437A;">
+            <col style="width: 42px;" span="2">
+        </colgroup>
+
+      <tr>
+        <td>&nbsp;</td>
+        <th>Mon</th>
+        <th>Tues</th>
+        <th>Wed</th>
+        <th>Thurs</th>
+        <th>Fri</th>
+        <th>Sat</th>
+        <th>Sun</th>
+      </tr>
+      <tr>
+        <th>1st period</th>
+        <td>English</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>German</td>
+        <td>Dutch</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <th>2nd period</th>
+        <td>English</td>
+        <td>English</td>
+        <td>&nbsp;</td>
+        <td>German</td>
+        <td>Dutch</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <th>3rd period</th>
+        <td>&nbsp;</td>
+        <td>German</td>
+        <td>&nbsp;</td>
+        <td>German</td>
+        <td>Dutch</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <th>4th period</th>
+        <td>&nbsp;</td>
+        <td>English</td>
+        <td>&nbsp;</td>
+        <td>English</td>
+        <td>Dutch</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+
+    <h1>School timetable</h1>
+
+    <table>
+      <colgroup>
+        <col span="2">
+        <col style="background-color:#97DB9A;">
+        <col style="width:42px;">
+        <col style="background-color:#97DB9A;">
+        <col style="background-color:#DCC48E; border:4px solid #C1437A;">
+        <col span="2" style="width:42px;">
+      </colgroup>
+      <tr>
+        <td>&nbsp;</td>
+        <th>Mon</th>
+        <th>Tues</th>
+        <th>Wed</th>
+        <th>Thurs</th>
+        <th>Fri</th>
+        <th>Sat</th>
+        <th>Sun</th>
+      </tr>
+      <tr>
+        <th>1st period</th>
+        <td>English</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>German</td>
+        <td>Dutch</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <th>2nd period</th>
+        <td>English</td>
+        <td>English</td>
+        <td>&nbsp;</td>
+        <td>German</td>
+        <td>Dutch</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <th>3rd period</th>
+        <td>&nbsp;</td>
+        <td>German</td>
+        <td>&nbsp;</td>
+        <td>German</td>
+        <td>Dutch</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <th>4th period</th>
+        <td>&nbsp;</td>
+        <td>English</td>
+        <td>&nbsp;</td>
+        <td>English</td>
+        <td>Dutch</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+
+    <h1>Table template</h1>
+    <table>
+        <tr>
+            <th></th>
+            <th>Col 1</th>
+            <th>Col 2</th>
+            <th>Col 3</th>
+            <th>Col 4</th>
+        </tr>
+        <tr>
+            <th>Row 1</th>
+            <td>I'm a Cell!</td>
+            <td>I too am a Cell!</td>
+            <td>I Three am a Cell!</td>
+            <td>I four am a Cell!</td>
+        </tr>
+        <tr>
+            <th>Row 2</th>
+            <td>Above me is 1</td>
+            <td>Above me is 2</td>
+            <td>Above me is 3</td>
+            <td>Above me is 4</td>
+        </tr>
+    </table>
+<br>
+    <table>
+        <tr>
+          <th colspan="2">Animals</th>
+        </tr>
+        <tr>
+          <th colspan="2">Hippopotamus</th>
+        </tr>
+        <tr>
+          <th rowspan="2">Horse</th>
+          <td>Mare</td>
+        </tr>
+        <tr>
+          <td>Stallion</td>
+        </tr>
+        <tr>
+          <th colspan="2">Crocodile</th>
+        </tr>
+        <tr>
+          <th rowspan="2">Chicken</th>
+          <td>Hen</td>
+        </tr>
+        <tr>
+          <td>Rooster</td>
+        </tr>
+      </table>
+  </body>
+</html>
