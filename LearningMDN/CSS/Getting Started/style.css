@@ -35,3 +35,20 @@ li em {
   a:hover {
     text-decoration: none;
   }
+
+body h1 + p .special {
+    color: yellow;
+    background-color: black;
+    padding: 5px;
+}
+
+body {
+    background-color: pink;
+}
+
+@media (min-width: 30em) {
+    body {
+        background-color: white;
+    }
+}
+/* Coment right ehrer */
