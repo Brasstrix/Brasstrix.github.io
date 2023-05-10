@@ -7,20 +7,36 @@ html {
   background-color: #00539f;
 }
 
-.NavButton {
+.NavBar {
+  border: none;
 	background-color: #ff9500;
-	padding: 5px 20px;
-	border:5px solid Black;
-	border-radius:10px;
+  margin: 5px;
+  padding: 5px;
+  gap: 5px;
+  display: flex;
+  list-style: none;
+}
+
+.NavButton {
+  border:5px solid Black;
+  flex-grow: 1;
+}
+
+.NavLink {
   color: #ffffff;
   text-decoration: none;
 }
 
-/*
-.NavButton:hover::before {
+.NavButton::before{
+  color: #ff9500;
   content: "▶";
 }
-*/
+
+.NavButton:hover::before {
+  color:#ffffff;
+  content: "▶";
+}
+
 
 .NavButton:hover {
 	background-color:#9b5d05

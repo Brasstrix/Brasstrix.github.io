@@ -36,7 +36,7 @@ myButton.onclick = () => {
   setUserName();
 };
 
-let UnList = document.querySelector("ul");
+let UnList = document.getElementById('Comments');
 const info = document.createElement('p');
 const info2 = document.createElement('h6');
 
