@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+
+	<meta name="Author" content="Jon Steen" />
+	<meta name="Description" content="This is my first webpage. 
+	I am currently learning to someday find a job doing all this!"
+	/>
+
+    <meta name="viewport" content="width=device-width" />
+	<link href="styles/callen.css" rel="stylesheet" />
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300&display=swap" rel="stylesheet">
+    
+	<title>Jon's Page</title>
+	<link rel="icon" href="media/SkeleIcon.png" type="image/x-icon" />
+	<script src="scripts/callen.js" defer></script>
+  </head>
+  <body>
+	<nav>
+		<ul class="NavBar">
+			<a class="NavLink" href="contact.html" title="Info about me"><li class="NavButton">About me</li></a>
+			<a class="NavLink" href="hobbies.html" title="Here's some things I do!"><li class="NavButton">My hobbies</li></a>
+            <a class="NavLink" href="index.html" title="Home"><li class="NavButton">Home</li></a>
+		</ul>
+	</nav> 
+    <article>
+        <h1>How I made this.</h1>
+        <section>
+            <p>
+                This was made fully using <a href="https://chat.openai.com/">ChatGPT</a>. I've been pretty 
+                hesitant to use it so far but frankly I need to start learning to use it, and like it. 
+                Honestly I feel a little cheated out since I could've made something like this, but frankly
+                it would've taken hours on hours to figure out. but this all was made in about less than 1 hour.
+            </p>
+        </section>
+    </article>
+    <body>
+        <div class="calendar">
+            <div class="calendar-header">
+              <button id="previous-btn" onclick="goToPreviousMonth()">Previous</button>
+              <div id="month-display"></div>
+              <button id="next-btn" onclick="goToNextMonth()">Next</button>
+            </div>
+        <table>
+          <thead>
+            <tr>
+              <th colspan="7">
+                <div id="month-display"></div>
+            </th>
+            </tr>
+            <tr>
+              <th>Sun</th>
+              <th>Mon</th>
+              <th>Tue</th>
+              <th>Wed</th>
+              <th>Thu</th>
+              <th>Fri</th>
+              <th>Sat</th>
+            </tr>
+          </thead>
+          <tbody id="calendar-body">
+            <!-- Calendar days will be generated dynamically here -->
+          </tbody>
+        </table>
+      </div>
+      <article>
+        <blockquote>
+        <h2>Summary of Conversation</h2>
+  <ul>
+    <li>To create a calendar using HTML5 and CSS, use a table structure with days of the month represented as table cells (<code>&lt;td&gt;</code> elements).</li>
+    <li>Add a new line at the start of each week by using the <code>&lt;tr&gt;</code> element to create a new row for each week.</li>
+    <li>To allow changing the displayed month, modify the JavaScript code to include previous and next month navigation buttons.</li>
+    <li>Update the displayed month at the top of the calendar by modifying the <code>generateCalendar()</code> function to include the month and year information.</li>
+    <li>Position the navigation buttons beside the month and year display by wrapping them in a container element and applying CSS styles for layout.</li>
+    <li>To prevent layout issues with longer month names, adjust CSS styles, such as using <code>white-space: nowrap</code> for buttons and the month display.</li>
+    <li>To save a transcript of our conversation, copy and paste the text or use the print or save functionality of your web browser.</li>
+  </ul>
+</blockquote>
+      </article>
+    </body>
+    </html>

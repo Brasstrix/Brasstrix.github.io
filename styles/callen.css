@@ -1,0 +1,64 @@
+@import 'style.css';
+.calendar {
+    width: 300px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 8px;
+    text-align: center;
+  }
+  
+  thead th {
+    font-weight: bold;
+  }
+  
+  td {
+    cursor: pointer;
+  }
+  
+  td:hover {
+    background-color: #f2f2f2;
+  }
+  .calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  #previous-btn,
+  #next-btn {
+    padding: 5px 10px;
+    background-color: #f2f2f2;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  
+  #month-display {
+    padding-left: 10px;
+    flex-grow: 1; /* Allow the month display to grow and occupy remaining space */
+    font-weight: bold;
+    white-space: nowrap;
+  }
+
+li{
+    padding: 5px;
+}
+code{
+    background-color: rgba(128, 128, 128, 0.523);
+    padding: 2px;
+    border-radius: 5px;
+}
+
+
+  
+  
+  
+  
+  
