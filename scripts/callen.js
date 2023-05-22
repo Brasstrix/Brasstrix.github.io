@@ -33,7 +33,10 @@ function generateCalendar(year, month) {
       } else {
         // Calendar day cells
         const cell = document.createElement("td");
-        cell.textContent = day;
+        const number = document.createElement("span");
+        number.classList.add("calendar-date"); // Add the calendar-date class to the span element
+        number.textContent = day;
+        cell.appendChild(number);
         row.appendChild(cell);
         day++;
       }

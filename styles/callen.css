@@ -1,64 +1,103 @@
 @import 'style.css';
-.calendar {
+
+.calendar-container {
     width: 300px;
-  }
-  
-  table {
+    margin: 0 auto; /* Center the calendar horizontally */
+    text-align: center; /* Center the month and navigation buttons */
+}
+
+table {
     width: 100%;
     border-collapse: collapse;
-  }
-  
-  th, td {
+    margin-left: auto; /* Align the table to the center horizontally */
+    margin-right: auto; /* Align the table to the center horizontally */
+}
+
+th, td {
     padding: 8px;
     text-align: center;
-  }
-  
-  thead th {
+    position: relative; /* Enable relative positioning */
+}
+
+thead th {
     font-weight: bold;
-  }
-  
-  td {
+}
+
+td {
     cursor: pointer;
-  }
-  
-  td:hover {
-    background-color: #f2f2f2;
-  }
-  .calendar-header {
+    padding: 1em;
+    border: 5px solid black;
+}
+
+td:hover {
+    background-color: #000000;
+}
+
+.calendar-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center; /* Center the elements horizontally */
     margin-bottom: 10px;
-  }
-  
-  #previous-btn,
-  #next-btn {
+}
+
+#previous-btn,
+#next-btn {
     padding: 5px 10px;
-    background-color: #f2f2f2;
+    font-size: larger;
+    background-color: rgba(0,0,0,0);
     border: none;
     cursor: pointer;
     white-space: nowrap;
-  }
-  
-  #month-display {
-    padding-left: 10px;
-    flex-grow: 1; /* Allow the month display to grow and occupy remaining space */
+}
+
+#month-year-container {
+    display: flex;
+    align-items: center;
+}
+
+#previous-btn {
+    margin-right: auto; /* Push the button to the left */
+}
+
+#next-btn {
+    margin-left: auto; /* Push the button to the right */
+}
+
+#month-display {
     font-weight: bold;
     white-space: nowrap;
-  }
+}
 
-li{
+#year-display {
+    font-weight: bold;
+    margin-top: 5px; /* Adjust the spacing between the month and year */
+}
+
+li {
     padding: 5px;
 }
-code{
+
+code {
     background-color: rgba(128, 128, 128, 0.523);
     padding: 2px;
     border-radius: 5px;
 }
 
+td {
+    cursor: pointer;
+    padding: 1em;
+    border: 5px solid black;
+    position: relative; /* Enable relative positioning */
+}
 
-  
-  
-  
-  
-  
+td .calendar-date {
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: left; /* Add this line to override the text-align property */
+}
+.calendar-date {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
