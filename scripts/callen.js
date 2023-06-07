@@ -70,8 +70,21 @@ function Update(){
   NetMonthtd.textContent = `$${NetMonth.toFixed(2)}`;
 }
 
+const MonthTable = document.getElementById('MonthTable');
+
 function MonthExpGen(){
-  alert('Gen time')
+  const row = document.createElement('tr');
+  
+  let expName = prompt('What is the Expense?');
+  let expCost = prompt('How much?');
+  let expPair = [expName,expCost];
+  for (let i = 0; i < 2; i++){
+    const cell = document.createElement('td');
+    cell.textContent = `${expPair[i]}`
+    row.append(cell);
+  }
+  MonthTable.append(row);
+  PerMonthExp.push([expName,expCost]);
 }
 
 const AddMonthExp = document.getElementById('AddMonthExp');
