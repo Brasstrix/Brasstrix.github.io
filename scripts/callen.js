@@ -13,83 +13,89 @@
 //  knows how many of each day there will be
 
 //Variables (let,const)
-let CurrentMonth = new Date().getMonth();
-let CurrentYear = new Date().getFullYear();
-const DisMonth = document.getElementById("DisMonth");
+let currentMonth = new Date().getMonth();
+let currentYear = new Date().getFullYear();
+const displayMonth = document.getElementById("displayMonth");
 
-let Pay = 19.86;
+let payRate = 19.86;
 
-let GrosWeek = 0;
-let NetWeek = 0;
-let ExpWeek = 0;
+let weeklyGross = 0;
+let weeklyNet = 0;
+let weeklyExpenses = 0;
 
-const GrosWeektd = document.getElementById("WeeklyGross");
-const NetWeektd = document.getElementById("WeeklyNet");
+let monthlyGross = 0;
+let monthlyNet = 0;
 
-let GrosMonth = 0;
-let NetMonth = 0;
+let monthlyExpenses = 0;
+let remainingMonthly = 0;
 
-const GrosMonthtd = document.getElementById("MonthGross");
-const NetMonthtd = document.getElementById("MonthNet");
+const weeklyGrossTd = document.getElementById("weeklyGross");
+const weeklyNetTd = document.getElementById("weeklyNet");
 
-let ExpMonth = 0;
-let RemMonth = 0;
+const monthlyGrossTd = document.getElementById("monthlyGross");
+const monthlyNetTd = document.getElementById("monthlyNet");
 
-let PerWeekExp = []; // [name, $, DayOfWeek]
-let PerMonthExp = []; //[Name, $]
+let weeklyExpensesList = []; // [name, $, dayOfWeek]
+let monthlyExpensesList = []; // [name, $]
 
-
-function GetDayCount(year,month){
-  const WeekdayCount = [0,0,0,0,0,0,0];
+function getWeekdayCount(year, month) {
+  const weekdayCount = [0, 0, 0, 0, 0, 0, 0];
   const date = new Date(year, month, 1);
 
-  while (date.getMonth() === month){
+  while (date.getMonth() === month) {
     const weekday = date.getDay();
 
-    WeekdayCount[weekday]++;
-    date.setDate(date.getDate()+1);
+    weekdayCount[weekday]++;
+    date.setDate(date.getDate() + 1);
   }
 
-  return WeekdayCount;
+  return weekdayCount;
 }
 
+function updateData() {
+  let days = getWeekdayCount(currentYear, currentMonth);
+  weeklyGross = payRate * 40;
+  weeklyNet = weeklyGross - (weeklyGross * 0.1081) - (weeklyGross * 0.0765);
 
-function Update(){
-  let days = GetDayCount(CurrentYear ,CurrentMonth);
-  GrosWeek = Pay * 40;
-  NetWeek = GrosWeek - (GrosWeek * 0.1081) -(GrosWeek * 0.0765);
+  monthlyGross = weeklyGross * days[5];
+  monthlyNet = weeklyNet * days[5];
 
-  GrosMonth = GrosWeek * days[5];
-  NetMonth = NetWeek * days[5];
-
-
-  DisMonth.textContent = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(new Date(CurrentYear, CurrentMonth));;
-  GrosWeektd.textContent = `$${GrosWeek.toFixed(2)}`;
-  NetWeektd.textContent = `$${NetWeek.toFixed(2)}`;
-  GrosMonthtd.textContent = `$${GrosMonth.toFixed(2)}`;
-  NetMonthtd.textContent = `$${NetMonth.toFixed(2)}`;
+  displayMonth.textContent = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(new Date(currentYear, currentMonth));
+  weeklyGrossTd.textContent = `$${weeklyGross.toFixed(2)}`;
+  weeklyNetTd.textContent = `$${weeklyNet.toFixed(2)}`;
+  monthlyGrossTd.textContent = `$${monthlyGross.toFixed(2)}`;
+  monthlyNetTd.textContent = `$${monthlyNet.toFixed(2)}`;
 }
 
-const MonthTable = document.getElementById('MonthTable');
+const monthlyExpensesTotal = document.getElementById('monthlyExpensesTotal');
 
-function MonthExpGen(){
+function updateMonthlyExpensesTotal() {
+  monthlyExpenses = 0;
+  for (let i = 0; i < monthlyExpensesList.length; i += 1) {
+    monthlyExpenses += monthlyExpensesList[i][1];
+  }
+  monthlyExpensesTotal.textContent = `${monthlyExpenses.toFixed(2)}`;
+}
+
+const monthlyTable = document.getElementById('monthlyTable');
+
+function generateMonthlyExpense() {
   const row = document.createElement('tr');
-  
-  let expName = prompt('What is the Expense?');
-  let expCost = prompt('How much?');
-  let expPair = [expName,expCost];
-  for (let i = 0; i < 2; i++){
+
+  let expenseName = prompt('What is the expense?');
+  let expenseCost = -1 * prompt('How much?');
+  let expensePair = [expenseName, expenseCost];
+  for (let i = 0; i < 2; i++) {
     const cell = document.createElement('td');
-    cell.textContent = `${expPair[i]}`
+    cell.textContent = `${expensePair[i]}`;
     row.append(cell);
   }
-  MonthTable.append(row);
-  PerMonthExp.push([expName,expCost]);
+  monthlyTable.append(row);
+  monthlyExpensesList.push([expenseName, expenseCost]);
+  updateMonthlyExpensesTotal();
 }
 
-const AddMonthExp = document.getElementById('AddMonthExp');
-AddMonthExp.addEventListener('click', function() {MonthExpGen();});
+const addMonthlyExpense = document.getElementById('addMonthlyExpense');
+addMonthlyExpense.addEventListener('click', function() { generateMonthlyExpense(); });
 
-
-Update();
-
+updateData();
