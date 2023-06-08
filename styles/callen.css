@@ -18,3 +18,8 @@ table, td {
 #Expense {
     padding: 5px;
 }
+
+#WeekdaySelector td{
+    padding: 5px;
+    font-size: small;
+}

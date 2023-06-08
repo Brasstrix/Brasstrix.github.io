@@ -29,14 +29,23 @@ let monthlyNet = 0;
 let monthlyExpenses = 0;
 let remainingMonthly = 0;
 
+let weeklyExpensesList = []; // [name, $, dayOfWeek]
+let monthlyExpensesList = []; // [name, $]
+
 const weeklyGrossTd = document.getElementById("weeklyGross");
 const weeklyNetTd = document.getElementById("weeklyNet");
 
 const monthlyGrossTd = document.getElementById("monthlyGross");
 const monthlyNetTd = document.getElementById("monthlyNet");
 
-let weeklyExpensesList = []; // [name, $, dayOfWeek]
-let monthlyExpensesList = []; // [name, $]
+const monthlyExpensesTotal = document.getElementById('monthlyExpensesTotal');
+const monthlyRemaining = document.getElementById('monthlyRemaining');
+
+const weeklyExpensesTotal = document.getElementById("weeklyExpensesTotal");
+
+const monthlyTable = document.getElementById('monthlyTable');
+const weeklyTable = document.getElementById("weeklyTable");
+
 
 function getWeekdayCount(year, month) {
   const weekdayCount = [0, 0, 0, 0, 0, 0, 0];
@@ -67,7 +76,14 @@ function updateData() {
   monthlyNetTd.textContent = `$${monthlyNet.toFixed(2)}`;
 }
 
-const monthlyExpensesTotal = document.getElementById('monthlyExpensesTotal');
+function updateWeeklyExpensesTotal(){
+  weeklyExpenses = 0
+  for (let i = 0; i < weeklyExpensesList.length; i++){
+    weeklyExpenses += weeklyExpensesList[i][1];
+  }
+  weeklyExpensesTotal.textContent = `${weeklyExpenses.toFixed(2)}`;
+}
+
 
 function updateMonthlyExpensesTotal() {
   monthlyExpenses = 0;
@@ -75,9 +91,8 @@ function updateMonthlyExpensesTotal() {
     monthlyExpenses += monthlyExpensesList[i][1];
   }
   monthlyExpensesTotal.textContent = `${monthlyExpenses.toFixed(2)}`;
+  monthlyRemaining.textContent = `${(monthlyNet+monthlyExpenses).toFixed(2)}`
 }
-
-const monthlyTable = document.getElementById('monthlyTable');
 
 function generateMonthlyExpense() {
   const row = document.createElement('tr');
@@ -97,5 +112,41 @@ function generateMonthlyExpense() {
 
 const addMonthlyExpense = document.getElementById('addMonthlyExpense');
 addMonthlyExpense.addEventListener('click', function() { generateMonthlyExpense(); });
+
+const addWeeklyExpenseTr = document.getElementById('addWeeklyExpenseTr');
+const dayLabels = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+let selectedDay;
+
+const dayOfWeekButtons = document.querySelectorAll('input[name="WeekdaySelected"');
+
+  dayOfWeekButtons.forEach(function(dayOfWeekButtons){
+    dayOfWeekButtons.addEventListener('change', function(){
+      if (this.checked){
+        selectedDay = this.value;
+      }
+    });
+  });
+
+
+function generateWeeklyExpense() {
+  const row = document.createElement('tr');
+
+  let expenseName = prompt('What is the expense?');
+  let expenseCost = -1 * prompt('How much?');
+
+  let expensePair = [expenseName, expenseCost, selectedDay];
+  for (let i = 0; i < 3; i++) {
+    const cell = document.createElement('td');
+    cell.textContent = `${expensePair[i]}`;
+    row.append(cell);
+  }
+  weeklyTable.append(row);
+  weeklyExpensesList.push([expenseName, expenseCost]);
+  updateWeeklyExpensesTotal();
+}
+
+const addWeeklyExpense = document.getElementById('addWeeklyExpense');
+addWeeklyExpense.addEventListener('click', function() { generateWeeklyExpense(); });
+
 
 updateData();

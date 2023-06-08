@@ -21,7 +21,7 @@
   </head>
   <body>
     <table>
-      <td id="DisMonth">Dis Month</td>
+      <td id="displayMonth">Dis Month</td>
     </table>
 
 
@@ -31,14 +31,14 @@
         <td id="weeklyNet">Weekly Net</td>
       </tr>
       <tr>
-        <td id="monthGross">Gross Monthly Income</td>
-        <td id="monthNet">Net Month Income</td>
+        <td id="monthlyGross">Gross Monthly Income</td>
+        <td id="monthlyNet">Net Month Income</td>
       </tr>
     </table>
 
     <table>
       <tr> <td id="monthlyExpensesTotal">-MonthExp</td> </tr>
-      <tr> <td>Month Remain</td> </tr>
+      <tr> <td id="monthlyRemaining">Month Remain</td> </tr>
     </table>
 
     <btn id="addMonthlyExpense">Add</btn>
@@ -48,11 +48,46 @@
     </table>
 
     <table>
-      <tr> <td>-WeeklyExp</td> </tr>
+      <td id="weeklyExpensesTotal">-WeeklyExp</td>
     </table>
 
-    <btn id="addWeeklyExpense">Add</btn>
-    <table>
+
+        <btn id="addWeeklyExpense">Add</btn>
+        <table id="WeekdaySelector">
+          <td>
+            <input type="radio" name="WeekdaySelected" id="Sunday" value="Sunday"></input>
+            <label for="Sunday"> Sunday</label> 
+          </td>
+          <td>
+           <input type="radio" name="WeekdaySelected" id="Monday" value="Monday"></input>
+           <label for="Monday"> Monday</label>
+          </td>
+          <td>
+            <input type="radio" name="WeekdaySelected" id="Tuesday" value="Tuesday"></input>
+            <label for="Tuesday"> Tuesday</label>
+          </td>
+          <td>
+            <input type="radio" name="WeekdaySelected" id="Wednesday" value="Wednesday"></input>
+            <label for="Wednesday"> Wednesday</label>
+          </td>
+          <td>
+            <input type="radio" name="WeekdaySelected" id="Thursday" value="Thursday"></input>
+            <label for="Thursday"> Thursday</label>
+          </td>
+          <td>
+            <input type="radio" name="WeekdaySelected" id="Friday" value="Friday"></input>
+            <label for="Friday"> Friday</label>
+          </td>
+          <td>
+            <input type="radio" name="WeekdaySelected" id="Saturday" value="Saturday"></input>
+            <label for="Saturday"> Saturday</label>
+          </td>
+           
+      </table>
+
+
+
+    <table id="weeklyTable">
       <thead>Weekly Expenses</thead>
 
     </table>
