@@ -21,7 +21,9 @@ let payRate = 19.86;
 
 let weeklyGross = 0;
 let weeklyNet = 0;
+
 let weeklyExpenses = 0;
+let WeeklyMontlyExpensesTotal = 0;
 
 let monthlyGross = 0;
 let monthlyNet = 0;
@@ -42,6 +44,7 @@ const monthlyExpensesTotal = document.getElementById('monthlyExpensesTotal');
 const monthlyRemaining = document.getElementById('monthlyRemaining');
 
 const weeklyExpensesTotal = document.getElementById("weeklyExpensesTotal");
+const WeeklyMontlyExpensesTotalTd = document.getElementById('WeeklyMontlyExpensesTotal');
 
 const monthlyTable = document.getElementById('monthlyTable');
 const weeklyTable = document.getElementById("weeklyTable");
@@ -86,7 +89,7 @@ function updateWeeklyExpensesTotal(){
 
 
 function updateMonthlyExpensesTotal() {
-  monthlyExpenses = 0;
+  monthlyExpenses = 0 + CalcMontlyWeekly();
   for (let i = 0; i < monthlyExpensesList.length; i += 1) {
     monthlyExpenses += monthlyExpensesList[i][1];
   }
@@ -115,7 +118,7 @@ addMonthlyExpense.addEventListener('click', function() { generateMonthlyExpense(
 
 const addWeeklyExpenseTr = document.getElementById('addWeeklyExpenseTr');
 const dayLabels = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-let selectedDay;
+let selectedDay = 500;
 
 const dayOfWeekButtons = document.querySelectorAll('input[name="WeekdaySelected"');
 
@@ -130,6 +133,10 @@ const dayOfWeekButtons = document.querySelectorAll('input[name="WeekdaySelected"
 
 function generateWeeklyExpense() {
   const row = document.createElement('tr');
+  if (selectedDay == 500){
+    alert('Please select a day');
+    return
+  }
 
   let expenseName = prompt('What is the expense?');
   let expenseCost = -1 * prompt('How much?');
@@ -141,8 +148,21 @@ function generateWeeklyExpense() {
     row.append(cell);
   }
   weeklyTable.append(row);
-  weeklyExpensesList.push([expenseName, expenseCost]);
+  weeklyExpensesList.push([expenseName, expenseCost,selectedDay]);
   updateWeeklyExpensesTotal();
+  CalcMontlyWeekly();
+}
+
+function CalcMontlyWeekly(){
+  let total = 0;
+  let WeekdayCount = getWeekdayCount(currentYear, currentMonth);
+
+  for(i=0;i<weeklyExpensesList.length;i++){
+    total += (weeklyExpensesList[i][1] * WeekdayCount[weeklyExpensesList[i][2]]);
+  }
+
+  WeeklyMontlyExpensesTotalTd.textContent = total.toFixed(2);
+  return total;
 }
 
 const addWeeklyExpense = document.getElementById('addWeeklyExpense');
