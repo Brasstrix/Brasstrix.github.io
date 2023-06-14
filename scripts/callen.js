@@ -34,10 +34,42 @@ const weeklyExpensesTotal = document.getElementById("weeklyExpensesTotal");
 const weeklyMontlyExpensesTotalTd = document.getElementById('WeeklyMontlyExpensesTotal');
 
 
-localStorage.setItem('monthlyTableList',(JSON.stringify([])));
-localStorage.setItem('weeklyTableList',(JSON.stringify([])));
 const monthlyTable = document.getElementById('monthlyTable'); // [name, $]
 const weeklyTable = document.getElementById("weeklyTable"); // [name, $, dayOfWeek]
+
+function redrawTables(){
+  monthlyTable.innerHTML = '';
+  weeklyTable.innerHTML = '';
+
+  let weekTableString = localStorage.getItem('weeklyTableList');
+  let weekTable = JSON.parse(weekTableString);
+  for (let i = 0; i < weekTable.length; i++) {
+   const rowWeek = document.createElement('tr');
+    for (let ii = 0; ii < 3; ii++) {
+     const cell = document.createElement('td');
+     cell.textContent = `${weekTable[i][ii]}`;
+     rowWeek.append(cell);
+   }
+    const button = delButton("weeklyTableList", weekTable[i][0],rowWeek)
+    rowWeek.append(button);
+    weeklyTable.append(rowWeek);
+  }
+
+  let currentTableString = localStorage.getItem('monthlyTableList');
+  let CurrentTable = JSON.parse(currentTableString);
+  for (let i = 0; i < CurrentTable.length; i++) {
+   const rowMonth = document.createElement('tr');
+    for (let ii = 0; ii < 2; ii++) {
+     const cell = document.createElement('td');
+     cell.textContent = `${CurrentTable[i][ii]}`;
+     rowMonth.append(cell);
+   }
+    const button = delButton("monthlyTableList", CurrentTable[i][0],rowMonth)
+    rowMonth.append(button);
+    monthlyTable.append(rowMonth);
+  }
+  
+}
 
 
 function getWeekdayCount(year, month) {
@@ -54,22 +86,22 @@ function getWeekdayCount(year, month) {
   return weekdayCount;
 }
 
-function calcWeeklyGrossNet() {
+function updateIncome(){
+  calcWeekly();
+
+  weeklyGrossTd.textContent = localStorage.getItem('weeklyGross');
+  weeklyNetTd.textContent = localStorage.getItem('weeklyNet');
+  monthlyGrossTd.textContent = localStorage.getItem('monthlyGross')
+  monthlyNetTd.textContent = localStorage.getItem('monthlyNet')
+}
+
+
+function calcWeekly() {
   let weeklyGross = payRate * 40
-  localStorage.setItem('weeklyGross', weeklyGross);
+  localStorage.setItem('weeklyGross', weeklyGross.toFixed(2));
   let weeklyNet = weeklyGross - (weeklyGross * 0.1081) - (weeklyGross * 0.0765);
-  localStorage.setItem('weeklyNet', weeklyNet);
+  localStorage.setItem('weeklyNet', weeklyNet.toFixed(2));
 
-  
-}
-
-function calcMontlyGrossNet(){
-  let days = getWeekdayCount(currentYear, currentMonth);
-  localStorage.setItem('monthlyGross', localStorage.getItem('weeklyGross') * days[5]);
-  localStorage.setItem('monthlyNet', localStorage.getItem('weeklyNet') * days[5]);
-}
-
-function calcWeeklyExpensesTotal(){
   let currentTableString = localStorage.getItem('weeklyTableList');
   let CurrentTable = JSON.parse(currentTableString);
   let weeklyExpenses = 0
@@ -77,10 +109,14 @@ function calcWeeklyExpensesTotal(){
     weeklyExpenses += CurrentTable[i][1];
   }
   weeklyExpensesTotal.textContent = `${weeklyExpenses.toFixed(2)}`;
+  calcMontly();
 }
 
+function calcMontly(){
+  let days = getWeekdayCount(currentYear, currentMonth);
+  localStorage.setItem('monthlyGross', (localStorage.getItem('weeklyGross') * days[5]).toFixed(2));
+  localStorage.setItem('monthlyNet', (localStorage.getItem('weeklyNet') * days[5]).toFixed(2));
 
-function calcMonthlyExpensesTotal() {
   let currentTableString = localStorage.getItem('monthlyTableList');
   let CurrentTable = JSON.parse(currentTableString);
   let monthlyExpenses = 0;
@@ -90,12 +126,6 @@ function calcMonthlyExpensesTotal() {
   monthlyExpensesTotal.textContent = `${monthlyExpenses.toFixed(2)}`;
   monthlyRemaining.textContent = `${(Number(localStorage.getItem('monthlyNet'))+monthlyExpenses).toFixed(2)}`
 }
-
-
-calcWeeklyGrossNet();
-calcMontlyGrossNet();
-calcMonthlyExpensesTotal();
-calcWeeklyExpensesTotal();
 
 
 function generateMonthlyExpense() {
@@ -112,10 +142,12 @@ function generateMonthlyExpense() {
     cell.textContent = `${expensePair[i]}`;
     row.append(cell);
   }
+  const button = delButton("monthlyTableList", expenseName,row)
+  row.append(button);
   monthlyTable.append(row);
   CurrentTable.push([expenseName, expenseCost]);
   localStorage.setItem("monthlyTableList", JSON.stringify(CurrentTable))
-  calcMonthlyExpensesTotal();
+  calcWeekly();
 }
 
 const addMonthlyExpense = document.getElementById('addMonthlyExpense');
@@ -157,11 +189,38 @@ function generateWeeklyExpense() {
     cell.textContent = `${expensePair[i]}`;
     row.append(cell);
   }
+  const button = delButton("weeklyTableList", expenseName,row)
+  row.append(button);
   weeklyTable.append(row);
   CurrentTable.push([expenseName, expenseCost, selectedDay]);
   localStorage.setItem("weeklyTableList", JSON.stringify(CurrentTable))
-  calcWeeklyExpensesTotal();
+  calcMontly();
 }
 
 const addWeeklyExpense = document.getElementById('addWeeklyExpense');
 addWeeklyExpense.addEventListener('click', function() { generateWeeklyExpense(); });
+
+
+
+function delButton(table, NameTd,row) {
+  const button = document.createElement('button');
+  button.textContent = 'X';
+  button.addEventListener('click', function() {
+    let currentTable = JSON.parse(localStorage.getItem(table));
+    let tablePos = 0;
+    for(let i = 0;i < currentTable.length; i++){
+      if(currentTable[i][0] == NameTd){
+        tablePos = i;
+      }
+    }
+    currentTable.splice(tablePos, 1);
+    localStorage.setItem(table, JSON.stringify(currentTable));
+    row.parentNode.removeChild(row);
+    calcWeekly();
+  });
+  return button;
+}
+
+
+updateIncome();
+redrawTables();
