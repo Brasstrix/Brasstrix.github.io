@@ -1,18 +1,3 @@
-//TO DO
-//Need variables
-//Pay/H
-//Weekly Gross+net, WeeklyExpenses
-//Month Gross+net, MonthExpenses, month remaining
-//Array for
-//OnceMonth Expense [Name, $]
-//Weekly Expense [name, $, DayOfWeek]
-
-//Net Income calculator
-//  Need week, month
-//Dis month
-//  knows how many of each day there will be
-
-//Variables (let,const)
 let currentMonth = new Date().getMonth();
 let currentYear = new Date().getFullYear();
 const displayMonth = document.getElementById("displayMonth");
